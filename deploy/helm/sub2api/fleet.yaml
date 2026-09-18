@@ -1,0 +1,6 @@
+defaultNamespace: sub2api
+
+helm:
+  chart: .
+  valuesFiles:
+    - values.yaml
