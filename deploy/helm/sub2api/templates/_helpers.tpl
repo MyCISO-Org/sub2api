@@ -104,7 +104,8 @@ Application ServiceAccount name.
 {{- end -}}
 
 {{- define "sub2api.storageClass" -}}
-{{- coalesce .Values.persistence.storageClass .Values.global.defaultStorageClass .Values.global.storageClass -}}
+{{- $sc := coalesce .Values.persistence.storageClass .Values.global.defaultStorageClass .Values.global.storageClass -}}
+{{- if $sc }}{{ $sc }}{{ end -}}
 {{- end -}}
 
 {{- define "sub2api.serviceFQDN" -}}
