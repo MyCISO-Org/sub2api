@@ -38,6 +38,14 @@ app:
 
 postgresql:
   enabled: true
+  auth:
+    # Set this before the first install. PostgreSQL bakes the password into
+    # its data directory at initdb time, but the Secret holding it is created
+    # fresh on every install. Left empty, Bitnami generates a random password,
+    # so reinstalling over a retained PVC fails with:
+    #   password authentication failed for user "sub2api"
+    # Generate one with: openssl rand -hex 24
+    password: ""
   primary:
     persistence:
       enabled: true
@@ -45,6 +53,10 @@ postgresql:
 
 redis:
   enabled: true
+  auth:
+    # Same as postgresql.auth.password above: set this before the first
+    # install so a reinstall over a retained PVC still authenticates.
+    password: ""
   master:
     persistence:
       enabled: true
